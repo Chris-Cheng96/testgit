@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- <ul>
+            <li :class="{active: activeIndex == index}" v-for="(item, index) in movies"
+             @click="activeIndex=index">{{ item }}</li>
+        </ul> -->
+        <!-- <label for="male">
+            <input type="radio" id="male" name="sex" value="男" v-model="sex">男   
+        </label>
+        <label for="female">
+            <input type="radio" id="female" name="sex" value="女" v-model="sex">女
+        </label> -->
+        <label v-for="(item, index) in hobbies" >
+            <input type="checkbox" v-model="hobby" :value="item">{{ item }}
+        </label>
+        <h2>您的选择： {{ hobby }}</h2>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                movies: ["星际穿越", "失控玩家", "泰坦尼克号", "飘"],
+                activeIndex: 0,
+                sex: "",
+                hobbies: ["篮球", "足球", "羽毛球", "乒乓球"],
+                hobby: []
+            }
+        })
+    </script>
+</body>
+</html>
