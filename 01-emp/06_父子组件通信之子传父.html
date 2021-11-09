@@ -8,14 +8,14 @@
 </head>
 <body>
     <div id="app">
-        <cpn :cmovies="movies"></cpn>
+        <cpn @itemclick="cpnClick"></cpn>
     </div>
     
     <template id="cpn">
         <div>
             <h2>子组件内容：</h2>
-            <p>{{cmovies}}</p>
-            <p>{{cmessage}}</p>
+            <p>{{childValue}}</p>
+            <button v-for="item in categories" @click="btnClick(item)">{{item.name}}</button>
         </div>
     </template>
 
@@ -23,22 +23,20 @@
     <script>
         const cpn = {
             template: "#cpn",
-            //2种props写法
-            // props: ["cmovies", "cmessage"],
-            props: {
-                // cmovies: Array,
-                cmovies: {
-                    type: Array,
-                    default: []
-                },
-                cmessage: {
-                    type: String,
-                    default: "哈哈哈"
-                }
-            },
             data() {
                 return {
-                    title: "eee"
+                    childValue: "child",
+                    categories: [
+                        {id: "a", name: "生活百货"},
+                        {id: "b", name: "美妆护肤" },
+                        {id: "c", name: "衣服饰品"}, 
+                        {id: "d", name: "运动健身"}
+                    ]
+                }
+            },
+            methods: {
+                btnClick(item){
+                    this.$emit("itemclick", item);
                 }
             }
         };
@@ -54,6 +52,11 @@
             //局部组件
             components: {
                 cpn
+            },
+            methods: {
+                cpnClick(value){
+                    console.log(value)
+                }
             }
 
         })
