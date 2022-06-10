@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <cpn>
+            <!-- 会代替名字为a的插槽内容 -->
+            <span slot="a">我是父组件有slot插槽</span> 
+            <span>我是父组件无slot插槽</span> 
+        </cpn>
+    </div>
+    
+    <template id="cpn">
+        <div>
+            <h2>子组件内容：</h2>
+            <!-- <p>{{childValue}}</p> -->
+            <!-- 父组件插槽内容会代替无名插槽内容 -->
+            <slot>我是无名插槽</slot>
+            <!-- 没有加slot属性的父组件插槽内容不会代替具名插槽内容 -->
+            <slot name="a">我是具名插槽</slot>
+        </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        const cpn = {
+            template: "#cpn",
+            data() {
+                return {
+                    childValue: "child",
+                    categories: [
+                        {id: "a", name: "生活百货"},
+                        {id: "b", name: "美妆护肤" },
+                        {id: "c", name: "衣服饰品"}, 
+                        {id: "d", name: "运动健身"}
+                    ]
+                }
+            }
+        };
+        const app = new Vue({
+            el: "#app",
+            data: {
+                movies: ["星际穿越", "失控玩家", "泰坦尼克号", "飘"],
+                activeIndex: 0,
+                sex: "",
+                hobbies: ["篮球", "足球", "羽毛球", "乒乓球"],
+                hobby: []
+            },
+            //局部组件
+            components: {
+                cpn
+            }
+        })
+    </script>
+</body>
+</html>
